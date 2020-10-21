@@ -1,10 +1,15 @@
-FROM node:8.11.4-alpine
+FROM node:10
 
-RUN mkdir -p /src
-RUN npm install express-generator -g
+COPY ["package.json", "/usr/local/nodeapps/"]
 
-WORKDIR /src
-ADD /package.json /src/package.json
+WORKDIR /usr/local/nodeapps
+
 RUN npm install
 
+RUN ls
+
+COPY ["." ,  "/usr/local/nodeapps/"]
+
 EXPOSE 3000
+
+CMD ["node" , "index.js"]
